@@ -1,0 +1,17 @@
+User.create(username: "Leonardo", email:"leo@tmnt.com", password: "blue")
+User.create(username: "Donatello", email:"don@tmnt.com", password: "purple")
+User.create(username: "Rafael", email:"raf@tmnt.com", password: "red")
+User.create(username: "Michelangelo", email:"mic@tmnt.com", password: "orange")
+
+TakeawayPizza.create(name: "Yard Sale Pizza", address: "184 Hackney Road")
+TakeawayPizza.create(name: "Homeslice", address: "374 old Street")
+TakeawayPizza.create(name: "Voodoo Rays", address: "1 Bethanl Green Road")
+
+Review.create(content: "Best pizza in my lifetime", user_id: "1", takeaway_pizza_id: "1")
+Review.create(content: "Expensive cardboard", user_id: "1", takeaway_pizza_id: "2")
+Review.create(content: "Good tomato sauce but too cheesey", user_id: "2", takeaway_pizza_id: "2")
+Review.create(content: "Hot, quick, tasty", user_id: "2", takeaway_pizza_id: "3")
+Review.create(content: "I've eaten dogfood that tasted better", user_id: "3", takeaway_pizza_id: "1")
+Review.create(content: "Good if you are in a rush but better pizzas exist", user_id: "3", takeaway_pizza_id: "3")
+Review.create(content: "Superb", user_id: "2", takeaway_pizza_id: "2")
+Review.create(content: "Cowabunga", user_id: "2", takeaway_pizza_id: "3")
