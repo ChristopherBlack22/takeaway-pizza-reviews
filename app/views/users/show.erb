@@ -1,0 +1,23 @@
+<h3>Hello <%= @user.username %>.</h3>
+<h4>An exciting world of Takeaway Pizza awaits you!</h4>
+
+<% if @user.reviews.empty? %>
+    <h5>Write your first Takeaway Pizza review <a href="/reviews/new">here</a></h5>
+    <p>See other people's reviews <a href="/reviews/index">here</a></p>
+
+
+<% else %>
+    <h5>Your previous Takeaway Pizza reviews</h5>
+    <br>
+    <% @user.reviews.each do |review| %>
+        <%= review.takeaway_pizza.name %> <%= review.created_at %>
+        <br>
+        <%= review.content %>
+        <br><br>
+    <% end %>
+
+    <h5>Write a new Takeaway Pizza review <a href="/reviews/new">here</a></h5>
+    <p>See other people's reviews <a href="/reviews/index">here</a></p>
+
+
+<% end %>
