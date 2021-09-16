@@ -29,4 +29,13 @@ class UsersController < ApplicationController
         end 
     end 
 
+    get "/users/:id" do
+        if logged_in?
+            @user = User.find(params[:id])
+            erb :"users/show"
+        else
+            redirect "/"
+        end 
+    end 
+
 end 
