@@ -5,4 +5,13 @@ class ReviewsController < ApplicationController
         erb :"reviews/index"
     end 
 
+    get "/reviews/new" do
+        @takeaway_pizzas = TakeawayPizza.all
+        erb :"reviews/new"
+    end 
+
+    post "/reviews" do 
+        puts params
+    end 
+
 end 

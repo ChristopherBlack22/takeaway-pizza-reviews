@@ -10,7 +10,7 @@
     <h5>Your previous Takeaway Pizza reviews</h5>
     <br>
     <% @user.reviews.each do |review| %>
-        <%= review.takeaway_pizza.name %> <%= review.created_at %>
+        <strong><%= review.takeaway_pizza.name %></strong> <small><%= review.created_at %></small>
         <br>
         <%= review.content %>
         <br><br>
