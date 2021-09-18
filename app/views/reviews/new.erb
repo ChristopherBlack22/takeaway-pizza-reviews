@@ -1,0 +1,24 @@
+<form method="post" action="/reviews">
+    Write a new review for one of these previously reviewed Takeaway Pizzas,
+    <br><br>
+    <% @takeaway_pizzas.each do |takeaway_pizza| %>
+        <input type="radio" name="review[takeaway_pizza_id]" value="<%= takeaway_pizza.id %>">
+        <strong><%= takeaway_pizza.name %></strong> <small><%= takeaway_pizza.address %></small>
+        <br>
+    <% end %>
+    <br><br>
+    Or be the first to review somewhere new.
+    <br><br>
+    Name
+    <input type="text" name="takeaway_pizza[name]">
+    Address
+    <input type="text" name="takeaway_pizza[address]">
+    <br><br>
+    Write your review
+    <input type="text" name="review[content]">
+    <input type="submit" value="Create review">
+
+
+</form>
+
+<p><a href="/logout">Logout</a></p>

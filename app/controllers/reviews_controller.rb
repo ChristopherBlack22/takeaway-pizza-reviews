@@ -18,14 +18,23 @@ class ReviewsController < ApplicationController
         elsif params["review"]["takeaway_pizza_id"]
             @review = Review.create(content: params["review"]["content"], takeaway_pizza_id: params["review"]["takeaway_pizza_id"], user_id: current_user.id)
             #add message review created
-            redirect "/reviews/:id"
+            redirect "/reviews/#{@review.id}"
         elsif params["takeaway_pizza"]["address"] == ""
             redirect "/reviews/new" #add error message, must have address
         else
             @takeaway_pizza = TakeawayPizza.create(params["takeaway_pizza"])
             @review = Review.create(content: params["review"]["content"], takeaway_pizza_id: @takeaway_pizza.id, user_id: current_user.id)
             #add message review created
-            redirect "/reviews/:id"
+            redirect "/reviews/#{@review.id}"
+        end 
+    end 
+
+    get "/reviews/:id" do
+        if logged_in?
+            @rview = Review.find(params[:id])
+            erb :"reviews/show"
+        else
+            redirect "/"
         end 
     end 
 
