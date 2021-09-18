@@ -1,1 +1,10 @@
-Hello this is the Reviews show page
+<%= @review.takeaway_pizza.name%> <%= @review.created_at %>
+<br>
+<%= @review.content %>
+<br><br>
+<% if @review.user == current_user%>
+Add an edit link
+<br>
+Add a delete link
+
+<% end %>
