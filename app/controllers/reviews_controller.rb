@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
 
-    get "/reviews/index" do
+    get "/reviews" do
         @reviews = Review.all
         erb :"reviews/index"
     end 
@@ -31,7 +31,7 @@ class ReviewsController < ApplicationController
 
     get "/reviews/:id" do
         if logged_in?
-            @review = Review.find(params[:id])
+            @review = Review.find_by_id(params[:id])
             erb :"reviews/show"
         else
             redirect "/"
@@ -39,8 +39,32 @@ class ReviewsController < ApplicationController
     end 
 
     get "/reviews/:id/edit" do
-        @review = Review.find(params[:id])
+        @review = Review.find_by_id(params[:id])
         erb :"reviews/edit"
+    end 
+
+    patch "/reviews/:id" do
+        #puts params
+        #binding.pry
+        @review = Review.find_by_id(params[:id])
+        @review.content = params["review"]["content"]
+        @review.save
+        if params["takeaway_pizza"]
+            @takeaway_pizza = @review.takeaway_pizza
+            @takeaway_pizza.name = params["takeaway_pizza"]["name"]
+            @takeaway_pizza.address = params["takeaway_pizza"]["address"]
+            @takeaway_pizza.save
+        end 
+        redirect "/reviews/#{@review.id}"
+    end 
+
+    delete "/reviews/:id" do
+        @review = Review.find_by_id(params[:id])
+        if @review.takeaway_pizza.reviews.count == 1
+            @review.takeaway_pizza.delete
+        end 
+        @review.delete
+        redirect "/reviews"  
     end 
 
 end 

@@ -1,8 +1,6 @@
-This is the reviews edit view
-
 <form method="post" action="/reviews/<%= @review.id %>">
     <input type="hidden" name="_method" value="patch">
-    <% if @review.takeaway_pizza.reviews.count > 1 %>
+    <% if @review.takeaway_pizza.reviews.count == 1 %>
         Takeaway Pizza name:
         <input type="text" name="takeaway_pizza[name]" value="<%= @review.takeaway_pizza.name %>">
         Address:
