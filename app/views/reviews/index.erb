@@ -1,5 +1,7 @@
+
+
 <% @reviews.each do |review| %>
-    <%= review.takeaway_pizza.name%> <%= review.created_at %>
+    <a href="/reviews/<%= review.id %>"><%= review.takeaway_pizza.name%></a> <%= review.created_at %>
     <br>
     <%= review.content %>
     <br><br>
