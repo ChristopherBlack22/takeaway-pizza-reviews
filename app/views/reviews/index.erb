@@ -1,11 +1,17 @@
 
-
-<% @reviews.each do |review| %>
-    <a href="/reviews/<%= review.id %>"><%= review.takeaway_pizza.name%></a> <%= review.created_at %>
+<% @takeaway_pizzas.each do |takeaway_pizza| %>
+    <strong><%= takeaway_pizza.name %> (<%= takeaway_pizza.address %>)</strong>
     <br>
-    <%= review.content %>
-    <br><br>
+    <% takeaway_pizza.reviews.each do |review| %>
+        <a href="/reviews/<%= review.id %>"> Reviewed at <%= review.created_at %> by <%= review.user.username %></a>
+        <br><br>
+    <% end %>
 <% end %>
+
+<br><br><br><br>
+
+
+
 
 
 <h5>Write a new Takeaway Pizza review <a href="/reviews/new">here</a></h5>
