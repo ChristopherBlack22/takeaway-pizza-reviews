@@ -3,8 +3,8 @@
 <%= @review.content %>
 <br><br>
 <% if @review.user == current_user%>
-Add an edit link
-<br>
-Add a delete link
+    <a href="/reviews/<%= @review.id %>/edit">Edit</a>
+    <br>
+    <a href="/reviews/<%= @review.id %>/delete">Delete</a>
 
 <% end %>
