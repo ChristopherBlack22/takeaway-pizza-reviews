@@ -10,9 +10,9 @@
     <% @user.reviews.each do |review| %>
         <strong><%= review.takeaway_pizza.name %></strong> <small><%= review.created_at %></small>
         <br>
-        <%= review.content %>
-        <a href="/reviews/<%= review.id %>/edit">Edit</a>
-        <a href="/reviews/<%= review.id %>/delete">Delete</a>
+        <small><a href="/reviews/<%= review.id %>">View</a></small>
+        <small><a href="/reviews/<%= review.id %>/edit">Edit</a></small>
+        <small><a href="/reviews/<%= review.id %>/delete">Delete</a></small>
         <br><br>
     <% end %>
 
