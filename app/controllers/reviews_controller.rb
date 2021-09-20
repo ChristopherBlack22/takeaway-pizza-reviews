@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
 
     get "/reviews" do
-        
         if logged_in?
             @takeaway_pizzas = TakeawayPizza.all
             #@reviews = Review.all
