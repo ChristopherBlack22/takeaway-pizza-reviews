@@ -1,14 +1,23 @@
 class ReviewsController < ApplicationController
 
     get "/reviews" do
-        @takeaway_pizzas = TakeawayPizza.all
-        #@reviews = Review.all
-        erb :"reviews/index"
+        
+        if logged_in?
+            @takeaway_pizzas = TakeawayPizza.all
+            #@reviews = Review.all
+            erb :"reviews/index"
+        else
+            redirect "/"
+        end 
     end 
 
     get "/reviews/new" do
-        @takeaway_pizzas = TakeawayPizza.all
-        erb :"reviews/new"
+        if logged_in?
+            @takeaway_pizzas = TakeawayPizza.all
+            erb :"reviews/new"
+        else
+            redirect "/"
+        end 
     end 
 
     post "/reviews" do 
@@ -42,7 +51,13 @@ class ReviewsController < ApplicationController
 
     get "/reviews/:id/edit" do
         @review = Review.find_by_id(params[:id])
-        erb :"reviews/edit"
+        if logged_in? && @review.user == current_user
+            erb :"reviews/edit"
+        elsif logged_in?
+            redirect "/reviews/#{@review.id}"
+        else
+            redirect "/"
+        end 
     end 
 
     patch "/reviews/:id" do
