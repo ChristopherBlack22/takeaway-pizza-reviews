@@ -11,7 +11,6 @@ class ReviewsController < ApplicationController
     end 
 
     post "/reviews" do 
-        #binding.pry
         if params["review"]["content"].empty?
             redirect "/reviews/new" #add error message, must have content
         elsif params["review"]["takeaway_pizza_id"] && params["takeaway_pizza"]["name"] != ""

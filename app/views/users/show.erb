@@ -2,9 +2,7 @@
 <h4>An exciting world of Takeaway Pizza awaits you!</h4>
 
 <% if @user.reviews.empty? %>
-    <h5>Write your first Takeaway Pizza review <a href="/reviews/new">here</a></h5>
-    <p>See other people's reviews <a href="/reviews">here</a></p>
-
+    <p>Write your first Takeaway Pizza review <a href="/reviews/new">here</a></p>
 
 <% else %>
     <h5>Your previous Takeaway Pizza reviews</h5>
@@ -13,12 +11,13 @@
         <strong><%= review.takeaway_pizza.name %></strong> <small><%= review.created_at %></small>
         <br>
         <%= review.content %>
+        <a href="/reviews/<%= review.id %>/edit">Edit</a>
+        <a href="/reviews/<%= review.id %>/delete">Delete</a>
         <br><br>
     <% end %>
 
-    <h5>Write a new Takeaway Pizza review <a href="/reviews/new">here</a></h5>
-    <p>See other people's reviews <a href="/reviews">here</a></p>
-    <p><a href="/logout">Logout</a></p>
-
-
+    <p>Write a new Takeaway Pizza review <a href="/reviews/new">here</a></p>
 <% end %>
+
+<p>See all reviews <a href="/reviews">here</a></p>
+<p><a href="/logout">Logout</a></p>
