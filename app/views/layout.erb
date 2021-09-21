@@ -14,11 +14,12 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+  
     <div class="wrapper">
-
+        <h2>Takeaway Pizza Reviews</h2>
         <%= yield %>
         <% if logged_in? %>
-          <p><a href="/logout">Logout</a></p>
+          <p>Pizza is ready to eat? <a href="/logout">Logout now!</a></p>
         <% end %>
           
 

@@ -3,9 +3,9 @@
 <%= @review.content %>
 <br><br>
 <% if @review.user == current_user%>
-    <a href="/reviews/<%= @review.id %>/edit">Edit</a>
+    <small><a href="/reviews/<%= @review.id %>/edit">Edit</a></small>
     <br>
-    <a href="/reviews/<%= @review.id %>/delete">Delete</a>
+    <small><a href="/reviews/<%= @review.id %>/delete">Delete</a></small>
 <% end %>
 
 <p>Go to your reviews <a href="/users/<%= current_user.id %>">here</a></p>

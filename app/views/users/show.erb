@@ -1,22 +1,18 @@
-<h3>Hello <%= @user.username %>.</h3>
-<h4>An exciting world of Takeaway Pizza awaits you!</h4>
-
+<h3>Hello <%= @user.username %>. An exciting world of Takeaway Pizza awaits you!</h3>
+<br><br>
 <% if @user.reviews.empty? %>
-    <p>Write your first Takeaway Pizza review <a href="/reviews/new">here</a></p>
-
+    <p>Ready to write your first ever Takeaway Pizza Review? Click<a href="/reviews/new">here!</a></p>
 <% else %>
-    <h5>Your previous Takeaway Pizza reviews</h5>
+    <h4>Here are your previous Takeaway Pizza reviews:</h4>
     <br>
-    <% @user.reviews.each do |review| %>
-        <strong><%= review.takeaway_pizza.name %></strong> <small><%= review.created_at %></small>
-        <br>
+    <% @user.reviews.sort{|a,b| b.created_at <=> a.created_at}.each do |review| %>
+        <strong><%= review.takeaway_pizza.name %></strong> <small><%= review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %></small>
+        
         <small><a href="/reviews/<%= review.id %>">View</a></small>
-        <small><a href="/reviews/<%= review.id %>/edit">Edit</a></small>
-        <small><a href="/reviews/<%= review.id %>/delete">Delete</a></small>
         <br><br>
     <% end %>
-
-    <p>Write a new Takeaway Pizza review <a href="/reviews/new">here</a></p>
+    <br><br>
+    <p>Ready to write a brand new Takeaway Pizza Review? Click <a href="/reviews/new">here!</a></p>
 <% end %>
 
-<p>See all reviews <a href="/reviews">here</a></p>
+<p>Read other users' tasty Takeaway Pizza Reviews <a href="/reviews">here!</a></p>
