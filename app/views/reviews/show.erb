@@ -1,4 +1,6 @@
-<%= @review.takeaway_pizza.name%> <%= @review.created_at %>
+<h3><%= @review.takeaway_pizza.name%></h3>
+<br>
+<%= @review.user.username %> <small><%= @review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %></small>
 <br>
 <%= @review.content %>
 <br><br>
@@ -8,6 +10,4 @@
     <small><a href="/reviews/<%= @review.id %>/delete">Delete</a></small>
 <% end %>
 
-<p>Go to your reviews <a href="/users/<%= current_user.id %>">here</a></p>
-<p>Return to the reviews <a href="/reviews">here</a></p>
 

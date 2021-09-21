@@ -18,8 +18,11 @@
     <div class="wrapper">
         <h2>Takeaway Pizza Reviews</h2>
         <%= yield %>
+        <br>
         <% if logged_in? %>
-          <p>Pizza is ready to eat? <a href="/logout">Logout now!</a></p>
+          <small><a href="/users/<%= current_user.id %>">Your Reviews</a>
+          | <a href="/reviews">All Takeaway Pizza Reviews</a>
+          | <a href="/logout">Logout</a></small>
         <% end %>
           
 
