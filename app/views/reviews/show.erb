@@ -1,13 +1,11 @@
 <h3><%= @review.takeaway_pizza.name%></h3>
-<br>
-<%= @review.user.username %> <small><%= @review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %></small>
-<br>
-<%= @review.content %>
-<br><br>
-<% if @review.user == current_user%>
-    <small><a href="/reviews/<%= @review.id %>/edit">Edit</a></small>
-    <br>
-    <small><a href="/reviews/<%= @review.id %>/delete">Delete</a></small>
-<% end %>
 
+<p><small><%= @review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %> - <%= @review.user.username %>
+    <% if @review.user == current_user%>
+        <a href="/reviews/<%= @review.id %>/edit">Edit</a>
+        <a href="/reviews/<%= @review.id %>/delete">Delete</a>
+    <% end %>
+</small></p>
 
+<p><%= @review.content %></p>
+<br>
