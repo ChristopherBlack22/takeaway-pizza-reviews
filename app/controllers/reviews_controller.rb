@@ -1,5 +1,7 @@
+require "rack-flash"
 class ReviewsController < ApplicationController
-
+    use Rack::Flash
+    
     get "/reviews" do
         if logged_in?
             @takeaway_pizzas = TakeawayPizza.all
