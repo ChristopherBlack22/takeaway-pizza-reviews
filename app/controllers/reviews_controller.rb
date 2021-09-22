@@ -29,7 +29,6 @@ class ReviewsController < ApplicationController
             redirect "/reviews/new"
         elsif params["review"]["takeaway_pizza_id"]
             @review = Review.create(content: params["review"]["content"], takeaway_pizza_id: params["review"]["takeaway_pizza_id"], user_id: current_user.id)
-            flash[:message] = "New Review created!"
             redirect "/reviews/#{@review.id}"
         elsif params["takeaway_pizza"]["name"] == "" || params["takeaway_pizza"]["address"] == ""
             flash[:message] = "Error - New Takeaway Pizzas must have a name and address!"
@@ -37,7 +36,6 @@ class ReviewsController < ApplicationController
         else
             @takeaway_pizza = TakeawayPizza.find_or_create_by(params["takeaway_pizza"])
             @review = Review.create(content: params["review"]["content"], takeaway_pizza_id: @takeaway_pizza.id, user_id: current_user.id)
-            flash[:message] = "New Review created!"
             redirect "/reviews/#{@review.id}"
         end 
     end 
@@ -80,7 +78,6 @@ class ReviewsController < ApplicationController
             @takeaway_pizza.address = params["takeaway_pizza"]["address"]
             @takeaway_pizza.save
         end 
-        flash[:message] = "Review updated!"
         redirect "/reviews/#{@review.id}"
     end 
 

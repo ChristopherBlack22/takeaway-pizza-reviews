@@ -1,4 +1,6 @@
+require "rack-flash"
 class UsersController < ApplicationController
+    use Rack::Flash
 
     get "/signup" do
         if logged_in?
@@ -10,11 +12,21 @@ class UsersController < ApplicationController
 
     post "/signup" do
         if params[:username] == "" || params[:email] == "" || params[:password] == ""
+            flash[:message] = "Error - All fields must be completed to create an account!"
             redirect "/signup"
         else
-            @user = User.create(params)
-            session[:user_id] = @user.id
-            redirect "/users/#{@user.id}" #replace @user.id with current_user ?
+            # @user = User.create(params)
+            # session[:user_id] = @user.id
+            # redirect "/users/#{@user.id}" #replace @user.id with current_user ?
+            @user = User.new(params)
+            if !@user.valid?
+                flash[:message] = "Error - Username already taken. Please choose a different one!"
+                redirect "/signup"
+            else
+                @user.save
+                session[:user_id] = @user.id
+                redirect "/users/#{@user.id}" #replace @user.id with current_user ?
+            end 
         end 
     end 
 
@@ -28,11 +40,12 @@ class UsersController < ApplicationController
 
     post "/login" do 
         @user = User.find_by(username: params[:username])
-        if @user && @user.authenticate(params[:password])
+        if @user && @user.email == params[:email] && @user.authenticate(params[:password])
             session[:user_id] = @user.id
             redirect "/users/#{@user.id}" #replace @user.id with current_user ?
         else
-        redirect "/"
+            flash[:message] = "Error - Account not found. Please try again or create a new account!"
+            redirect "/login"
         end 
     end 
 
