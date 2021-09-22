@@ -15,9 +15,6 @@ class UsersController < ApplicationController
             flash[:message] = "Error - All fields must be completed to create an account!"
             redirect "/signup"
         else
-            # @user = User.create(params)
-            # session[:user_id] = @user.id
-            # redirect "/users/#{@user.id}" #replace @user.id with current_user ?
             @user = User.new(params)
             if !@user.valid?
                 flash[:message] = "Error - Username already taken. Please choose a different one!"

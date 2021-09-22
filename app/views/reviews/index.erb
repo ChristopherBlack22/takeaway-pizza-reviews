@@ -10,8 +10,8 @@
             <% else %>
                 <%= review.user.username %>
             <% end %>
-            on <%= review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %>
-            
+            on 
+            <%= review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %>            
             <a href="/reviews/<%= review.id %>">View</a>
         </small>
         <br>
