@@ -3,15 +3,16 @@
 <% if @user.reviews.empty? %>
     <p>Ready to write your first ever Takeaway Pizza Review? Click<a href="/reviews/new">here!</a></p>
 <% else %>
-    <h4>Here are your previous Takeaway Pizza reviews:</h4>
-    <br>
+    <p>Here are your previous Takeaway Pizza reviews:</p>
     <% @user.reviews.sort{|a,b| b.created_at <=> a.created_at}.each do |review| %>
-        <strong><%= review.takeaway_pizza.name %></strong> <small><%= review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %></small>
-        
-        <small><a href="/reviews/<%= review.id %>">View</a></small>
+        <strong><%= review.takeaway_pizza.name %> (<%= review.takeaway_pizza.address %>)</strong> 
+        <br>
+        <small>
+            <%= review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %>
+            <a href="/reviews/<%= review.id %>">View</a>
+        </small>
         <br><br>
     <% end %>
-    <br><br>
-    <p>Ready to write a brand new Takeaway Pizza Review? Click <a href="/reviews/new">here!</a></p>
+    <br>
+    <p>Write a new Takeaway Pizza Review <a href="/reviews/new">here.</a></p>
 <% end %>
-

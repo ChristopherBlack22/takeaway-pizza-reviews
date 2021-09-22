@@ -1,22 +1,22 @@
 <form method="post" action="/reviews/<%= @review.id %>">
     <input type="hidden" name="_method" value="patch">
+    <strong>Edit this Takeaway Pizza Review.</strong>
+    <br><br>
     <% if @review.takeaway_pizza.reviews.count == 1 %>
-        Takeaway Pizza name:
+        <label for="takeaway_pizza[name]">Name: </label>
         <input type="text" name="takeaway_pizza[name]" value="<%= @review.takeaway_pizza.name %>">
-        Address:
+        <br>
+        <label for="takeaway_pizza[address]">Address: </label>
         <input type="text" name="takeaway_pizza[address]" value="<%= @review.takeaway_pizza.address %>">
-
     <% else %>
-        Takeaway Pizza name: <%= @review.takeaway_pizza.name %>
+        Name: <%= @review.takeaway_pizza.name %>
         <br>
         Address: <%= @review.takeaway_pizza.address %>
     <% end %>
+    <br>
     Review:
     <input type="text" name="review[content]" value="<%= @review.content %>">
+    <br><br>
     <input type="submit" value="Edit review">
 </form>
-<br><br><br>
-<form method="post" action="/reviews/<%= @review.id %>">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete Review">
-</form>
+<br>

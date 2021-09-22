@@ -20,6 +20,7 @@ class ReviewsController < ApplicationController
     end 
 
     post "/reviews" do 
+        puts params
         if params["review"]["content"].empty?
             redirect "/reviews/new" #add error message, must have content
         elsif params["review"]["takeaway_pizza_id"] && params["takeaway_pizza"]["name"] != ""
@@ -28,8 +29,8 @@ class ReviewsController < ApplicationController
             @review = Review.create(content: params["review"]["content"], takeaway_pizza_id: params["review"]["takeaway_pizza_id"], user_id: current_user.id)
             #add message review created
             redirect "/reviews/#{@review.id}"
-        elsif params["takeaway_pizza"]["address"] == ""
-            redirect "/reviews/new" #add error message, must have address
+        elsif params["takeaway_pizza"]["name"] == "" || params["takeaway_pizza"]["address"] == ""
+            redirect "/reviews/new" #add error message, must have name and address
         else
             #@takeaway_pizza = TakeawayPizza.create(params["takeaway_pizza"])
             @takeaway_pizza = TakeawayPizza.find_or_create_by(params["takeway_pizza"])

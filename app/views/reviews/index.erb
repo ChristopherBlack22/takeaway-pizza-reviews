@@ -1,19 +1,24 @@
-
+<h3>All Reviews by all Users</h3>
+<br>
 <% @takeaway_pizzas.each do |takeaway_pizza| %>
-    <h3><%= takeaway_pizza.name %> (<%= takeaway_pizza.address %>)</h3>
+    <strong><%= takeaway_pizza.name %> (<%= takeaway_pizza.address %>)</strong>
+    <br>
     <% takeaway_pizza.reviews.sort{|a,b| b.created_at <=> a.created_at}.each do |review| %>
-        Reviewed by <% if review.user == current_user %>
-            you
-        <% else %>
-            <%= review.user.username %>
-        <% end %>
-        on <%= review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %>
-        
-        <small><a href="/reviews/<%= review.id %>">View</a></small>
+        <small>
+            Reviewed by <% if review.user == current_user %>
+                you
+            <% else %>
+                <%= review.user.username %>
+            <% end %>
+            on <%= review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %>
+            
+            <a href="/reviews/<%= review.id %>">View</a>
+        </small>
         <br>
     <% end %>
+    <br>
 <% end %>
 
-<br><br>
+<br>
 
-<h5>Write a new Takeaway Pizza review <a href="/reviews/new">here</a></h5>
+<p>Write a new Takeaway Pizza review <a href="/reviews/new">here</a></p>
