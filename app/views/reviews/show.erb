@@ -1,20 +1,27 @@
 <h3><%= @review.takeaway_pizza.name%> (<%= @review.takeaway_pizza.address %>)</h3>
 <small> 
-    Reviewed by <% if @review.user == current_user %>
+    Reviewed by 
+    <% if @review.user == current_user %>
         you
     <% else %>
         <%= @review.user.username %>
     <% end %>
-    on <%= @review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %>
+    on 
+    <%= @review.created_at.to_s.split(" ")[0].split("-").reverse.join("-") %>
     <% if @review.user == current_user%>
         <a href="/reviews/<%= @review.id %>/edit">Edit</a>
     <% end %>
 </small>
 <br><br>
 <p><%= @review.content %></p>
-<br>
-<form method="post" action="/reviews/<%= @review.id %>">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete Review">
-</form>
+<% if @review.user == current_user %>
+    <form method="post" action="/reviews/<%= @review.id %>">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete Review">
+    </form>
+<% end %>
+<br><br>
+<a href="/reviews/new">
+    <strong>Write a new Takeaway Pizza Review</strong>
+</a>
 <br>
