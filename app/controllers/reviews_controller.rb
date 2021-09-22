@@ -82,13 +82,17 @@ class ReviewsController < ApplicationController
     end 
 
     delete "/reviews/:id" do
-        @review = Review.find_by_id(params[:id])
-        if @review.takeaway_pizza.reviews.count == 1
-            @review.takeaway_pizza.delete
-        end 
-        @review.delete
-        flash[:message] = "Review deleted!"
-        redirect "/reviews"  
+        if logged_in?
+            @review = Review.find_by_id(params[:id])
+            if @review.takeaway_pizza.reviews.count == 1
+                @review.takeaway_pizza.delete
+            end 
+            @review.delete
+            flash[:message] = "Review deleted!"
+            redirect "/reviews" 
+        else 
+           redirect "/" 
+        end
     end 
 
 end 
