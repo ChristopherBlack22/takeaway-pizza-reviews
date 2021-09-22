@@ -16,7 +16,10 @@
   <body>
   
     <div class="wrapper">
-        <h2>Takeaway Pizza Reviews</h2>
+        <h1>Takeaway Pizza Reviews</h1>
+        <em>
+          <h2><% if flash.has?(:message) %> <%= flash[:message] %> <% end %></h2>
+        </em>  
         <%= yield %>
         <br>
         <% if logged_in? %>

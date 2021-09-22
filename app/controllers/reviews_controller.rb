@@ -1,7 +1,7 @@
 require "rack-flash"
 class ReviewsController < ApplicationController
     use Rack::Flash
-    
+
     get "/reviews" do
         if logged_in?
             @takeaway_pizzas = TakeawayPizza.all
@@ -22,22 +22,24 @@ class ReviewsController < ApplicationController
     end 
 
     post "/reviews" do 
-        puts params
+        
         if params["review"]["content"].empty?
-            redirect "/reviews/new" #add error message, must have content
-        elsif params["review"]["takeaway_pizza_id"] && params["takeaway_pizza"]["name"] != ""
-            redirect "/reviews/new" #add error message, cant select old pizza and create new together
+            flash[:message] = "Takeaway Pizza Reviews must contain some content!"
+            redirect "/reviews/new" 
+        elsif params["review"]["takeaway_pizza_id"] && (params["takeaway_pizza"]["name"] != "" || params["takeaway_pizza"]["address"] != "")
+            flash[:message] = "You cannot select an existing Takeaway Pizza and provide details for a new on. It's one or the other!"
+            redirect "/reviews/new"
         elsif params["review"]["takeaway_pizza_id"]
             @review = Review.create(content: params["review"]["content"], takeaway_pizza_id: params["review"]["takeaway_pizza_id"], user_id: current_user.id)
-            #add message review created
+            flash[:message] = "New Takeway Pizza Review created!"
             redirect "/reviews/#{@review.id}"
         elsif params["takeaway_pizza"]["name"] == "" || params["takeaway_pizza"]["address"] == ""
-            redirect "/reviews/new" #add error message, must have name and address
+            flash[:message] = "New Takeway Pizzas must have a name AND an address!"
+            redirect "/reviews/new"
         else
-            #@takeaway_pizza = TakeawayPizza.create(params["takeaway_pizza"])
-            @takeaway_pizza = TakeawayPizza.find_or_create_by(params["takeway_pizza"])
+            @takeaway_pizza = TakeawayPizza.find_or_create_by(params["takeaway_pizza"])
             @review = Review.create(content: params["review"]["content"], takeaway_pizza_id: @takeaway_pizza.id, user_id: current_user.id)
-            #add message review created
+            flash[:message] = "New Takeway Pizza Review created!"
             redirect "/reviews/#{@review.id}"
         end 
     end 
