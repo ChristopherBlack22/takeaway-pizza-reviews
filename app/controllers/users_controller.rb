@@ -22,7 +22,7 @@ class UsersController < ApplicationController
             else
                 @user.save
                 session[:user_id] = @user.id
-                redirect "/users/#{@user.id}" #replace @user.id with current_user ?
+                redirect "/users/#{@user.id}" 
             end 
         end 
     end 
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
         @user = User.find_by(username: params[:username])
         if @user && @user.email == params[:email] && @user.authenticate(params[:password])
             session[:user_id] = @user.id
-            redirect "/users/#{@user.id}" #replace @user.id with current_user ?
+            redirect "/users/#{@user.id}" 
         else
             flash[:message] = "Error - Account not found. Please try again or create a new account!"
             redirect "/login"
